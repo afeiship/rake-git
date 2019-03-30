@@ -5,7 +5,7 @@ semver_hash = JSON.load File.open "./package.json"
 # main task list:
 namespace :git do
   # Core command
-  def invoke(action,args)
+  def invoke_tag_action(action,args)
     case action
     when :create
       sh "git tag #{args[:version]}"
@@ -15,24 +15,23 @@ namespace :git do
       sh "git push --delete origin #{args[:version]}"
     when :push
       sh "git push origin #{args[:version]}"
+    when :list
+      sh 'git tag -l'
     else
       puts "defaults"
     end
   end
 
-  [:create,:del,:del_remote,:push].each do |action|
+  # Generate tag actions:
+  [:create,:del,:del_remote,:push,:list].each do |action|
     task_name = action.to_s.capitalize.split('_').join ' '
     desc "#{task_name} tag from semver file(eg: package.json/.semver)"
     task "tag_#{action}",[:version] do |task, args|
       args.with_defaults(
         :version => "v#{semver_hash['version']}",
         )
-      invoke(action, args)
+      invoke_tag_action(action, args)
     end
   end
 
-  desc "List all tags in local."
-  task :tag_list do
-    sh 'git tag -l'
-  end
 end
