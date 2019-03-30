@@ -29,7 +29,7 @@ namespace :git do
     task "tag_#{action}",[:version] do |task, args|
       args.with_defaults(
         :version => "v#{semver_hash['version']}",
-        )
+      )
       invoke_tag_action(action, args)
     end
   end
