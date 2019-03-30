@@ -7,25 +7,34 @@ end
 
 # main task list:
 namespace :git do
-  # build & serve:
+  # Core command
   desc "Create tag from default semver file(eg: package.json/.semver)"
-  task :tag_add do
-    sh 'git tag v0.1.2-light'
+  task :tag_add,[:filename] do |task, args|
+    args.with_defaults(
+      :filename => "./package.json",
+    )
+    sh "git tag #{args[:filename]}"
   end
 
   desc "Delete tag from default semver file."
-  task :tag_del do
-    sh 'git tag -d v0.1.2-light'
-    sh 'git push --delete origin v0.1.2-light'
+  task :tag_del,[:filename] do |task, args|
+    args.with_defaults(
+      :filename => "./package.json",
+    )
+    sh "git tag -d #{args[:filename]}"
+    sh "git push --delete origin #{args[:filename]}"
   end
 
   desc "Push current tag to remote."
-  task :tag_push do
-    sh 'git push origin v0.1.2-light'
+  task :tag_push,[:filename] do |task, args|
+    args.with_defaults(
+      :filename => "./package.json",
+    )
+    sh "git push origin #{args[:filename]}"
   end
 
   desc "List all tags in local."
-  task :tag_list do
+  task :tag_list
     sh 'git tag -l'
   end
 end
