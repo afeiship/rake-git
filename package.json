@@ -1,0 +1,17 @@
+{
+  "name": "rake-git",
+  "version": "1.0.0",
+  "description": "Rake task for git.",
+  "main": "index.rake",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afeiship/rake-git.git"
+  },
+  "keywords": ["rake", "task"],
+  "author": "afei",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/afeiship/rake-git/issues"
+  },
+  "homepage": "https://github.com/afeiship/rake-git#readme"
+}
