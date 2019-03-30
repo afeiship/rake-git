@@ -16,7 +16,7 @@ namespace :git do
     when :push
       sh "git push origin #{args[:version]}"
     when :list
-      sh 'git tag -l'
+      sh "git tag -l"
     else
       puts "defaults"
     end
