@@ -25,7 +25,7 @@ namespace :git do
     desc "#{task_name} tag from semver file(eg: package.json/.semver)"
     task "tag_#{action}",[:version] do |task, args|
       args.with_defaults(
-        :version => "v#{semver_hash['version'] || args[:version]}",
+        :version => "v#{semver_hash['version']}",
         )
       invoke(action, args)
     end
