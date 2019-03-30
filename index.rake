@@ -16,6 +16,7 @@ namespace :git do
   desc "Delete tag from default semver file."
   task :tag_del do
     sh 'git tag -d v0.1.2-light'
+    sh 'git push --delete origin v0.1.2-light'
   end
 
   desc "Push current tag to remote."
