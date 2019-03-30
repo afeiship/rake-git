@@ -8,15 +8,15 @@ namespace :git do
   def invoke_tag_action(action,args)
     case action
     when :create
-      sh "git tag #{args[:version]}"
+      %x(git tag #{args[:version]})
     when :del
-      sh "git tag -d #{args[:version]}"
+      %x(git tag -d #{args[:version]})
     when :del_remote
-      sh "git push --delete origin #{args[:version]}"
+      %x(git push --delete origin #{args[:version]})
     when :push
-      sh "git push origin #{args[:version]}"
+      %x(git push origin #{args[:version]})
     when :list
-      sh "git tag -l"
+      %x(git tag -l)
     else
       puts "defaults"
     end
@@ -29,7 +29,7 @@ namespace :git do
     task "tag_#{action}",[:version] do |task, args|
       args.with_defaults(
         :version => "v#{semver_hash['version']}",
-      )
+        )
       invoke_tag_action(action, args)
     end
   end
