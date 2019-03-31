@@ -8,17 +8,17 @@ namespace :git do
   def invoke_tag_action(action,args)
     case action
     when :create
-      %x(git tag #{args[:version]})
+      sh "git tag #{args[:version]}"
     when :del
-      %x(git tag -d #{args[:version]})
+      sh "git tag -d #{args[:version]}"
     when :del_remote
-      %x(git push --delete origin #{args[:version]})
+      sh "git push --delete origin #{args[:version]}"
     when :push
-      %x(git push origin #{args[:version]})
+      sh "git push origin #{args[:version]}"
     when :list
-      %x(git tag -l)
+      sh "git tag -l"
     when :list_all
-      %x(git ls-remote --tags)
+      sh "git ls-remote --tags"
     else
       puts "defaults"
     end
