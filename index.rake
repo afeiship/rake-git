@@ -17,15 +17,17 @@ namespace :git do
       %x(git push origin #{args[:version]})
     when :list
       %x(git tag -l)
+    when :list_all
+      %x(git ls-remote)
     else
       puts "defaults"
     end
   end
 
   # Generate tag actions:
-  [:create,:del,:del_remote,:push,:list].each do |action|
-    task_name = action.to_s.capitalize.split('_').join ' '
-    desc "#{task_name} tag from semver file(eg: package.json/.semver)"
+  [:create,:del,:del_remote,:push,:list,:list_all].each do |action|
+    desc_name = action.to_s.capitalize.split('_').join ' '
+    desc "#{desc_name} tag from semver file(eg: package.json/.semver)"
     task "tag_#{action}",[:version] do |task, args|
       args.with_defaults(
         :version => "v#{semver_hash['version']}",
