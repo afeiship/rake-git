@@ -15,9 +15,9 @@ namespace :git do
       sh "git push --delete origin #{args[:version]}"
     when :push
       sh "git push origin #{args[:version]}"
-    when :list
-      sh "git tag -l"
-    when :list_all
+    when :list_local
+      sh "git tag"
+    when :list_remote
       sh "git ls-remote --tags"
     else
       puts "defaults"
@@ -25,7 +25,7 @@ namespace :git do
   end
 
   # Generate tag actions:
-  [:create,:del,:del_remote,:push,:list,:list_all].each do |action|
+  [:create,:del,:del_remote,:push,:list_local,:list_remote].each do |action|
     desc_name = action.to_s.capitalize.split('_').join ' '
     desc "#{desc_name} tag from semver file(eg: package.json/.semver)"
     task "tag_#{action}",[:version] do |task, args|
