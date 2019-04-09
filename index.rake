@@ -10,7 +10,7 @@ namespace :git do
     when :create
       sh "git tag #{args[:version]}"
     when :create_with_msg
-      sh "git tag #{args[:version]} -m=#{args[:msg]}"
+      sh "git tag #{args[:version]} -m='add: tagging by rake script'"
     when :del
       sh "git tag -d #{args[:version]}"
     when :del_remote
@@ -30,7 +30,7 @@ namespace :git do
   [:create, :create_with_msg, :del, :del_remote, :push, :list_local, :list_remote].each do |action|
     desc_name = action.to_s.capitalize.split("_").join " "
     desc "#{desc_name} tag from semver file(eg: package.json/.semver)"
-    task "tag_#{action}", [:version, :msg] do |task, args|
+    task "tag_#{action}", [:version] do |task, args|
       args.with_defaults(
         :version => "v#{semver_hash["version"]}",
       )
