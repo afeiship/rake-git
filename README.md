@@ -3,7 +3,7 @@
 
 ## install:
 ```bash
-npm i -S afeiship/rake-git --registry=https://registry.npm.taobao.org
+npm i -D afeiship/rake-git --registry=https://registry.npm.taobao.org
 ```
 
 ## usage:
