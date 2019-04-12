@@ -1,16 +1,17 @@
 require "json"
 
-semver_hash = JSON.load File.open "./package.json"
+package_hash = JSON.load File.open "./package.json"
 
 # main task list:
 namespace :git do
   # Core command
   def invoke_tag_action(action, args)
+    msg = "add: tagging by script - #{args[:version]}"
     case action
     when :create
       sh "git tag #{args[:version]}"
     when :create_with_msg
-      sh "git tag #{args[:version]} -m='add: tagging by script' - #{args[:version]} "
+      sh "git tag #{args[:version]} -m='#{msg}'"
     when :del
       sh "git tag -d #{args[:version]}"
     when :del_remote
@@ -29,10 +30,10 @@ namespace :git do
   # Generate tag actions:
   [:create, :create_with_msg, :del, :del_remote, :push, :list_local, :list_remote].each do |action|
     desc_name = action.to_s.capitalize.split("_").join " "
-    desc "#{desc_name} tag from semver file(eg: package.json/.semver)"
+    desc "#{desc_name} tag from semver file(eg: package.json)"
     task "tag_#{action}", [:version] do |task, args|
       args.with_defaults(
-        :version => "v#{semver_hash["version"]}",
+        :version => "v#{package_hash["version"]}",
       )
       invoke_tag_action(action, args)
     end
