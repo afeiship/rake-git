@@ -10,7 +10,7 @@ namespace :git do
     when :create
       sh "git tag #{args[:version]}"
     when :create_with_msg
-      sh "git tag #{args[:version]} -m='add: tagging by script'"
+      sh "git tag #{args[:version]} -m='add: tagging by script' - #{args[:version]} "
     when :del
       sh "git tag -d #{args[:version]}"
     when :del_remote
