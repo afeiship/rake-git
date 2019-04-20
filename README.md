@@ -1,12 +1,12 @@
 # rake-git
 > Rake task for git.
 
-## install:
+## installation
 ```bash
 npm i -D afeiship/rake-git --registry=https://registry.npm.taobao.org
 ```
 
-## usage:
+## usage
 ~~~
 $ rake -T
 rake git:branch_create[name]           # Create branch action
