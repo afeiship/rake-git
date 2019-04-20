@@ -23,7 +23,26 @@ namespace :git do
     when :list_remote
       sh "git ls-remote --tags"
     else
-      puts "defaults"
+      puts "defaults tag action"
+    end
+  end
+
+  def invoke_branch_action(action, args)
+    case action
+    when :create
+      sh "git branch #{args[:name]}"
+    when :delete
+      begin
+        sh "git push --delete origin #{args[:name]}"
+        sh "git branch -d #{args[:name]}"
+      rescue => exception
+      end
+    when :list
+      sh "git branch -a"
+    when :push
+      sh "git push --set-upstream origin #{args[:name]}"
+    else
+      puts "defaults branch action"
     end
   end
 
@@ -36,6 +55,15 @@ namespace :git do
         :version => "v#{package_hash["version"]}",
       )
       invoke_tag_action(action, args)
+    end
+  end
+
+  # Generate branch actions:
+  [:create, :delete, :list, :push].each do |action|
+    desc_name = action.to_s.capitalize.split("_").join " "
+    desc "#{desc_name} branch action"
+    task "branch_#{action}", [:name] do |task, args|
+      invoke_branch_action(action, args)
     end
   end
 end
