@@ -1,6 +1,6 @@
 {
   "name": "rake-git",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Rake task for git.",
   "main": "index.rake",
   "repository": {
