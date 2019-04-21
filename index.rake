@@ -46,10 +46,13 @@ namespace :git do
     end
   end
 
+  def desc_name(action)
+    action.to_s.capitalize.split("_").join " "
+  end
+
   # Generate tag actions:
   [:create, :create_with_msg, :del, :del_remote, :push, :list_local, :list_remote].each do |action|
-    desc_name = action.to_s.capitalize.split("_").join " "
-    desc "#{desc_name} tag from semver file(eg: package.json)"
+    desc "#{desc_name(action)} tag from semver file(eg: package.json)"
     task "tag_#{action}", [:version] do |task, args|
       args.with_defaults(
         :version => "v#{package_hash["version"]}",
@@ -60,8 +63,7 @@ namespace :git do
 
   # Generate branch actions:
   [:create, :delete, :list, :push].each do |action|
-    desc_name = action.to_s.capitalize.split("_").join " "
-    desc "#{desc_name} branch action"
+    desc "#{desc_name(action)} branch action"
     task "branch_#{action}", [:name] do |task, args|
       invoke_branch_action(action, args)
     end
