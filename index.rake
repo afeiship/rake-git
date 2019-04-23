@@ -9,16 +9,13 @@ namespace :git do
     msg = "add: tagging by script - #{args[:version]}"
     case action
     when :create
-      sh "git tag #{args[:version]}"
-    when :create_with_msg
       sh "git tag #{args[:version]} -m='#{msg}'"
-    when :del
+    when :delete
       sh "git tag -d #{args[:version]}"
-    when :del_remote
       sh "git push --delete origin #{args[:version]}"
     when :push
       sh "git push origin #{args[:version]}"
-    when :list_local
+    when :list
       sh "git tag"
     when :list_remote
       sh "git ls-remote --tags"
@@ -53,7 +50,7 @@ namespace :git do
   end
 
   # Generate tag actions:
-  [:create, :create_with_msg, :del, :del_remote, :push, :list_local, :list_remote, :tagging].each do |action|
+  [:create, :delete, :push, :list, :list_remote, :tagging].each do |action|
     desc "#{desc_name(action)} tag from semver file(eg: package.json)"
     task "tag_#{action}", [:version] do |task, args|
       args.with_defaults(
