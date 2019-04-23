@@ -20,4 +20,5 @@ rake git:tag_del_remote[version]       # Del remote tag from semver file(eg: pac
 rake git:tag_list_local[version]       # List local tag from semver file(eg: package.json)
 rake git:tag_list_remote[version]      # List remote tag from semver file(eg: package.json)
 rake git:tag_push[version]             # Push tag from semver file(eg: package.json)
+rake git:tag_tagging[version]          # Tagging tag from semver file(eg: package.json)
 ~~~

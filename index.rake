@@ -53,7 +53,7 @@ namespace :git do
   end
 
   # Generate tag actions:
-  [:create, :create_with_msg, :del, :del_remote, :push, :list_local, :list_remote].each do |action|
+  [:create, :create_with_msg, :del, :del_remote, :push, :list_local, :list_remote, :tagging].each do |action|
     desc "#{desc_name(action)} tag from semver file(eg: package.json)"
     task "tag_#{action}", [:version] do |task, args|
       args.with_defaults(
