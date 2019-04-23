@@ -22,6 +22,8 @@ namespace :git do
       sh "git tag"
     when :list_remote
       sh "git ls-remote --tags"
+    when :tagging
+      sh "git tag #{args[:version]} -m='#{msg}' && git push origin #{args[:version]}"
     else
       puts "defaults tag action"
     end
