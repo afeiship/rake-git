@@ -29,7 +29,7 @@ namespace :git do
   def invoke_branch_action(action, args)
     case action
     when :create
-      sh "git branch #{args[:name]}"
+      sh "git checkout -b #{args[:name]}"
     when :delete
       begin
         sh "git push --delete origin #{args[:name]}"
