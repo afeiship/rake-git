@@ -9,7 +9,7 @@ namespace :git do
     msg = "add: tagging by script - #{args[:version]}"
     case action
     when :create
-      sh "git tag #{args[:version]} -m='#{msg}'"
+      sh "git tag #{args[:version]} -m '#{msg}'"
     when :delete
       sh "git tag -d #{args[:version]}"
       sh "git push --delete origin #{args[:version]}"
@@ -20,7 +20,7 @@ namespace :git do
     when :list_remote
       sh "git ls-remote --tags"
     when :tagging
-      sh "git tag #{args[:version]} -m='#{msg}' && git push origin #{args[:version]}"
+      sh "git tag #{args[:version]} -m '#{msg}' && git push origin #{args[:version]}"
     else
       puts "defaults tag action"
     end
