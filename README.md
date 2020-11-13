@@ -3,7 +3,7 @@
 
 ## installation
 ```bash
-npm i -D @feizheng/rake-git
+npm i -D @jswork/rake-git
 ```
 
 ## usage
